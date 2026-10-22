@@ -1,17 +1,16 @@
-
-NAME, DUR, CW, X0 = "Freakah", 8, 40, 80  
+# Stop stalking the code weirdo
+NAME, DUR, CW, X0 = "Freakah", 8, 40, 80
 THEMES = {
     "dark": dict(bg="#0d1117", border="#30363d", text="#e6edf3", muted="#7d8590", accent="#58a6ff"),
     "light": dict(bg="#ffffff", border="#d0d7de", text="#1f2328", muted="#656d76", accent="#0969da"),
 }
 n = len(NAME)
 appear = [(0.4 + 0.16 * i) / DUR for i in range(n)]
-erase = [(6.2 + 0.06 * (n - 1 - i)) / DUR for i in range(n)]  
+erase = [(6.2 + 0.06 * (n - 1 - i)) / DUR for i in range(n)]
 cur = [(0, X0)] + [(appear[i], X0 + CW * (i + 1)) for i in range(n)]
 cur += [(erase[i], X0 + CW * i) for i in reversed(range(n))] + [(1, X0)]
 times = [t for t, _ in cur]
 assert times == sorted(times) and times[-1] == 1, times
-
 
 def svg(c):
     chars = "\n".join(
@@ -36,7 +35,6 @@ def svg(c):
   <text x="80" y="205" font-family="ui-monospace, 'SF Mono', Consolas, monospace" font-size="18" letter-spacing="1" fill="{c["muted"]}">github.com/Freakah</text>
 </svg>
 '''
-
 
 for theme, colors in THEMES.items():
     with open(f"banner-{theme}.svg", "w", newline="\n") as f:
