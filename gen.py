@@ -1,14 +1,12 @@
-# Generates banner-dark.svg and banner-light.svg. Run: python gen.py
-NAME, DUR, CW, X0 = "Freakah", 8, 40, 80  # CW = monospace char width at 64px
+
+NAME, DUR, CW, X0 = "Freakah", 8, 40, 80  
 THEMES = {
     "dark": dict(bg="#0d1117", border="#30363d", text="#e6edf3", muted="#7d8590", accent="#58a6ff"),
     "light": dict(bg="#ffffff", border="#d0d7de", text="#1f2328", muted="#656d76", accent="#0969da"),
 }
 n = len(NAME)
 appear = [(0.4 + 0.16 * i) / DUR for i in range(n)]
-erase = [(6.2 + 0.06 * (n - 1 - i)) / DUR for i in range(n)]  # erased right to left
-
-# cursor: start at X0, step right as each char appears, step back as each is erased
+erase = [(6.2 + 0.06 * (n - 1 - i)) / DUR for i in range(n)]  
 cur = [(0, X0)] + [(appear[i], X0 + CW * (i + 1)) for i in range(n)]
 cur += [(erase[i], X0 + CW * i) for i in reversed(range(n))] + [(1, X0)]
 times = [t for t, _ in cur]
